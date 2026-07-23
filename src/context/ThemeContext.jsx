@@ -1,70 +1,30 @@
-import {
-createContext,
-useState,
-useEffect
-}
-from "react";
+import { createContext, useState, useEffect } from "react";
 
+export const ThemeContext = createContext();
 
-export const ThemeContext=createContext();
+export function ThemeProvider({ children }) {
+  const [dark, setDark] = useState(localStorage.getItem("theme") === "dark");
 
+  useEffect(() => {
+    if (dark) {
+      document.documentElement.classList.add("dark");
 
-export function ThemeProvider({children}){
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
 
+      localStorage.setItem("theme", "light");
+    }
+  }, [dark]);
 
-const [dark,setDark]=useState(
-localStorage.getItem("theme")==="dark"
-);
-
-
-
-useEffect(()=>{
-
-
-if(dark){
-
-document.documentElement.classList.add("dark");
-
-localStorage.setItem(
-"theme",
-"dark"
-);
-
-
-}else{
-
-
-document.documentElement.classList.remove("dark");
-
-localStorage.setItem(
-"theme",
-"light"
-);
-
-
-}
-
-
-},[dark]);
-
-
-
-return(
-
-<ThemeContext.Provider
-
-value={{
-dark,
-setDark
-}}
-
->
-
-{children}
-
-</ThemeContext.Provider>
-
-)
-
-
+  return (
+    <ThemeContext.Provider
+      value={{
+        dark,
+        setDark,
+      }}
+    >
+      {children}
+    </ThemeContext.Provider>
+  );
 }
