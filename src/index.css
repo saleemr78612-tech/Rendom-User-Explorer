@@ -1,12 +1,4 @@
 @import "tailwindcss";
 
 
-body{
-
-margin:0;
-
-font-family:
-Inter,
-sans-serif;
-
-}
+@custom-variant dark (&:where(.dark, .dark *));

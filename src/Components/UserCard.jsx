@@ -1,61 +1,41 @@
 import {
-
-FaEnvelope,
-FaPhone,
-FaLocationDot
-
-} from "react-icons/fa6";
-
-
-import {motion} from "framer-motion";
-
-
-
-function UserCard({user}){
-
-
-const copyEmail=()=>{
-
-navigator.clipboard.writeText(
-user.email
-);
-
-alert("Email Copied");
-
+Link
 }
+from "react-router-dom";
 
+
+import {
+FaHeart
+}
+from "react-icons/fa";
+
+
+
+function UserCard({
+user,
+index,
+addFavorite
+}){
 
 
 return(
 
-
-<motion.div
-
-initial={{
-opacity:0,
-y:50
-}}
-
-animate={{
-opacity:1,
-y:0
-}}
-
-className="
-bg-white/20
+<div className="
+bg-white/70
+dark:bg-gray-900/70
 backdrop-blur-xl
 border
-border-white/30
+border-gray-200
+dark:border-gray-700
 rounded-3xl
 p-6
-text-white
 shadow-xl
-hover:-translate-y-2
-transition
-"
-
-
->
+hover:shadow-2xl
+hover:-translate-y-3
+transition-all
+duration-300
+text-center
+">
 
 
 <img
@@ -68,21 +48,18 @@ h-32
 rounded-full
 mx-auto
 border-4
-border-white
-object-cover
+border-purple-500
 "
 
 />
 
 
-
 <h2 className="
-text-2xl
+text-xl
 font-bold
-text-center
-mt-5
+mt-4
+dark:text-white
 ">
-
 
 {user.name.first}
 
@@ -90,37 +67,13 @@ mt-5
 
 {user.name.last}
 
-
 </h2>
 
 
-
 <p className="
-text-center
-mt-2
-">
-
-Age:
-{user.dob.age}
-
-</p>
-
-
-
-<div className="
-mt-5
-space-y-3
 text-sm
+dark:text-gray-300
 ">
-
-
-<p className="
-flex
-items-center
-gap-3
-">
-
-<FaEnvelope/>
 
 {user.email}
 
@@ -128,70 +81,58 @@ gap-3
 
 
 
-<p className="
+<div className="
 flex
-items-center
+justify-center
 gap-3
-">
-
-<FaPhone/>
-
-{user.phone}
-
-</p>
-
-
-
-<p className="
-flex
-items-center
-gap-3
+mt-5
 ">
 
 
-<FaLocationDot/>
+<Link
 
-{user.location.city},
-{user.location.country}
+to={`/user/${index}`}
 
+className="
+bg-purple-600
+text-white
+px-5
+py-2
+rounded-full
+"
 
-</p>
+>
 
+View
 
-</div>
-
+</Link>
 
 
 
 <button
 
-onClick={copyEmail}
+onClick={()=>addFavorite(user)}
 
 className="
-mt-6
-w-full
-bg-white
-text-purple-600
-py-2
+bg-red-500
+text-white
+px-4
 rounded-full
-font-semibold
-hover:bg-gray-100
-transition
 "
 
 >
 
-Copy Email
+<FaHeart/>
 
 </button>
 
 
+</div>
 
-</motion.div>
 
+</div>
 
 )
-
 
 }
 
