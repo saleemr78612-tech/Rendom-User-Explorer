@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import UserCard from "../components/UserCard";
+import UserCard from "../Components/UserCard";
 
 function Home() {
   const [users, setUsers] = useState([]);
